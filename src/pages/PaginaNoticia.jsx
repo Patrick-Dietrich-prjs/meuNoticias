@@ -33,30 +33,33 @@ function PaginaNoticia() {
   }
 
   return (
-    <div className="parteProjeto-wrapper">
-      <div className="container">
-        <button className="update-btn" onClick={() => navigate('/')}>
+    <div className="noticia-wrapper">
+      <div className="noticia-container">
+        <button className="btn-voltar" onClick={() => navigate('/')}>
           ← Voltar
         </button>
 
-        <h1>{noticia.title}</h1>
+        <h1 className="noticia-titulo">{noticia.title}</h1>
 
-        <p>
+        <p className="noticia-meta">
           {noticia.author?.rendered} • {noticia.publish_date}
           {noticia.category?.name && ` • ${noticia.category.name}`}
         </p>
 
         {noticia.featured_media?.image?.url && (
           <img
+            className="noticia-imagem"
             src={noticia.featured_media.image.url}
             alt={noticia.title}
           />
         )}
 
         <div
+          className="noticia-conteudo"
           dangerouslySetInnerHTML={{
             __html: noticia.content?.content || noticia.content?.raw || noticia.excerpt
-        }}/>
+          }}
+        />
       </div>
     </div>
   )

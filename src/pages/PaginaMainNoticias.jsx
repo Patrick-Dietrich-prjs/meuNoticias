@@ -50,19 +50,19 @@ function PaginaMainNoticias() {
     <div className="page">
       <h1 className="page-title">MeuNotícias</h1>
 
-      <div>
-        {categorias.map(categoria => (
+      <div className="categorias">
+        {categorias.map(cat => (
           <button
-            key={categoria.value}
-            className="update-btn"
-            onClick={() => setCategoria(categoria.value)}
+            key={cat.value}
+            className={`categoria-btn ${categoria === cat.value ? 'categoria-btn--ativa' : ''}`}
+            onClick={() => setCategoria(cat.value)}
           >
-            {categoria.label}
+            {cat.label}
           </button>
         ))}
       </div>
 
-      <div className="input-box">
+      <div className="busca-box">
         <input
           type="text"
           value={busca}
@@ -73,7 +73,7 @@ function PaginaMainNoticias() {
         <button onClick={handleBuscar}>Buscar</button>
       </div>
 
-      <div className="container-projetos">
+      <div className="noticias-grid">
         {noticias.length === 0 ? (
           <p className="empty-message">Nenhuma notícia encontrada.</p>
         ) : (
