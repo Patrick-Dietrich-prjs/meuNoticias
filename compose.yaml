@@ -13,6 +13,7 @@ services:
       context: .
     environment:
       NODE_ENV: production
+    command: npm run dev -- --host 0.0.0.0 --port 5174
     ports:
       - 5174:5174
 

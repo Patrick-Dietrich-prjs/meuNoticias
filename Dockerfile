@@ -54,19 +54,25 @@ FROM base as final
 ENV NODE_ENV production
 
 # Run the application as a non-root user.
-USER node
+# USER node
 
 # Copy package.json so that package manager commands can be used.
 COPY package.json .
 
 # Copy the production dependencies from the deps stage and also
-# the built application from the build stage into the image.
+# the built application from the build stage.
 COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/. ./.
+COPY --from=build /usr/src/app/. ./
 
+# Give the non-root Node user access to the application files.
+RUN chown -R node:node /usr/src/app
+
+# Run the application as the non-root Node user.
+USER node
 
 # Expose the port that the application listens on.
 EXPOSE 5174
 
 # Run the application.
 CMD npm run dev
+
